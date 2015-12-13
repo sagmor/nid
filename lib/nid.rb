@@ -86,7 +86,7 @@ class NID
         raise type_error(string, "malformed UUID representation") if elements.size != 5
         [elements.join].pack('H32')
       else
-        string = string.tr("-_", "+/").unpack("m").first
+        string = (string + "=").tr("-_", "+/").unpack("m").first
         if string.length == 16
           string
         else
