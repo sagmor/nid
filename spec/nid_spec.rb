@@ -50,6 +50,24 @@ describe NID do
       expect{ NID.new("asdf") }.to raise_error(TypeError)
       expect{ NID.new("123456789012345678901234567890123456") }.to raise_error(TypeError)
     end
+
+
+    it "returns a consistent NID object independently of the format used" do
+      nid = NID.new(:tests)
+
+      nid1 = NID.new(nid)
+      expect(nid1).to eql(nid)
+
+      nid2 = NID.new(nid.to_s)
+      expect(nid2).to eql(nid)
+
+      nid3 = NID.new(nid.to_uuid)
+      expect(nid3).to eql(nid)
+
+      nid4 = NID.new(nid.bytes)
+      expect(nid4).to eql(nid)
+
+    end
   end
 
   describe "#to_uuid" do
