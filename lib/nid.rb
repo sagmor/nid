@@ -65,7 +65,7 @@ class NID
   #
   # @return [Time] the generation time.
   def time
-    spread = "#{namespace}//".unpack("m").first.length
+    spread = "#{namespace}//=".unpack("m").first.length
     Time.at(*bytes[spread,4].unpack("N"))
   end
 
