@@ -97,7 +97,7 @@ class NID
 
     # Generate bytes string with the given time
     def random_bytes_with_time(namespace, time)
-      bytes = "#{namespace}//".unpack("m")[0]
+      bytes = "#{namespace}//=".unpack("m")[0]
       bytes << [time.to_i].pack('N')
       bytes << SecureRandom.random_bytes(16-bytes.length)
 
