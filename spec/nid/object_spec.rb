@@ -48,7 +48,8 @@ describe NID do
     it 'raises an error when arguments are invalid' do
       expect { NID.new([]) }.to raise_error(TypeError)
       expect { NID.new('asdf') }.to raise_error(TypeError)
-      expect { NID.new('123456789012345678901234567890123456') }.to raise_error(TypeError)
+      expect { NID.new('123456789012345678901234567890123456') }.to \
+        raise_error(TypeError)
     end
 
     it 'returns a consistent NID object independently of the format used' do
@@ -72,7 +73,8 @@ describe NID do
     it 'returns a UUID formated string' do
       nid = NID.new(:tests)
 
-      expect(nid.to_uuid).to match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)
+      expect(nid.to_uuid).to \
+        match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)
     end
   end
 

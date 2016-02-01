@@ -1,3 +1,7 @@
+# Namespaced ID
+#
+# This class let's you build UUID compatible values that are Time sortable and
+# namespaced
 class NID
   # NID binary representation
   attr_reader :bytes
@@ -27,7 +31,7 @@ class NID
                random_bytes_with_time(data, time || Time.now)
              else
                fail type_error(data, 'invalid type')
-    end.freeze
+             end.freeze
   end
 
   # Compares two NIDs.
@@ -51,7 +55,7 @@ class NID
   alias to_str to_s
 
   def to_uuid
-    '%08x-%04x-%04x-%04x-%04x%08x' % bytes.unpack('NnnnnN')
+    format '%08x-%04x-%04x-%04x-%04x%08x', *bytes.unpack('NnnnnN')
   end
 
   def namespace
@@ -80,15 +84,14 @@ class NID
       string.frozen? ? string : string.dup
     when 36
       elements = string.split('-')
-      fail type_error(string, 'malformed UUID representation') if elements.size != 5
+      fail type_error(string, 'malformed UUID representation') \
+        if elements.size != 5
       [elements.join].pack('H32')
     else
       string = (string + '=').tr('-_', '+/').unpack('m').first
-      if string.length == 16
-        string
-      else
-        fail type_error(string, 'invalid bytecount')
-      end
+      fail type_error(string, 'invalid bytecount') unless string.length == 16
+
+      string
     end
   end
 
@@ -103,6 +106,8 @@ class NID
 
   # Create a formatted type error.
   def type_error(source, error)
-    TypeError.new("Expected #{source.inspect} to cast to a #{self.class} (#{error})")
+    TypeError.new(
+      "Expected #{source.inspect} to cast to a #{self.class} (#{error})"
+    )
   end
 end
