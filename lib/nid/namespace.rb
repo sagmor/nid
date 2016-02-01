@@ -8,7 +8,7 @@ class NID # :nodoc:
     end
 
     def new(value = nil)
-      nid = case(value)
+      nid = case value
             when String, NID
               @klass.new(value)
             else
@@ -24,6 +24,6 @@ class NID # :nodoc:
   end
 
   def self.[](namespace)
-    Namespace.new(self,namespace)
+    Namespace.new(self, namespace)
   end
 end

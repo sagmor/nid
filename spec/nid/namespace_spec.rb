@@ -19,6 +19,6 @@ describe NID::Namespace do
 
   it 'rejects values of another namespace' do
     nid = NID.new(:other)
-    expect{ namespace.new(nid) }.to raise_error(ArgumentError)
+    expect { namespace.new(nid) }.to raise_error(ArgumentError)
   end
 end
