@@ -1,38 +1,31 @@
-# Nid
+# Namespaced IDs
+[![Build Status](https://travis-ci.org/sagmor/nid.svg?branch=master)](https://travis-ci.org/sagmor/nid)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/nid`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is an attempt to model a value compatible with the UUID representation
 
-TODO: Delete this and the text above, and describe your gem
+but with the following attributes:
 
-## Installation
+ * Namespaced: Every NID has a namespace value that allow to easily
+ diferenciate one ID from another
+ * Sortable: a Time object (or current time) is used on the value to allow NID
+ object to be sorted within their namespace
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'nid'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install nid
+Also NID object can be reprented both in UUID format and on *NID* format.
+For example `sample__Vq_DG_RasCrrkg` and `b1a9a995-efff-56af-c31b-f45ab02aeb92`
+represent the same randomly generated NID within the `sample` namespace.
+They are [freely inspired by Stripe's ID scheme](https://www.quora.com/How-does-Stripe-generate-object-ids/answer/Patrick-Collison).
 
 ## Usage
 
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To generate a random NID on the `sample` namespace you just:
+```ruby
+NID.new(:sample)
+# => #<NID sample__Vq_DG_RasCrrkg>
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/nid. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/nid. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](https://contributor-covenant.org) code of conduct.
 
 
 ## License
