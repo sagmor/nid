@@ -8,3 +8,10 @@ rvm:
   - ruby-head
   - jruby-head
 before_install: gem install bundler -v 1.10.6
+script:
+  - bundle exec rspec
+  - bundle exec rubocop
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+    - rvm: jruby-head
